@@ -15,11 +15,18 @@ const pool =
   globalForDb.pool ??
   new Pool({
     connectionString,
-    max: 10,
+    max: 15,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 30_000,
+    keepAlive: true,
     ssl: connectionString.includes("localhost")
       ? false
       : { rejectUnauthorized: false },
   });
+
+pool.on("error", (err) => {
+  console.error("[db pool] idle client error:", err.message);
+});
 
 if (process.env.NODE_ENV !== "production") {
   globalForDb.pool = pool;
