@@ -64,7 +64,7 @@ export default function SlotLockPage() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [venue, setVenue] = useState("");
-  const [eventDate, setEventDate] = useState(defaultEventDateInput);
+ const [eventDate, setEventDate] = useState("");
   const [priceDollars, setPriceDollars] = useState("25");
   const [totalSeats, setTotalSeats] = useState("5");
   const [creatingEvent, setCreatingEvent] = useState(false);
@@ -92,8 +92,9 @@ export default function SlotLockPage() {
   }, [loadEvents, loadBookings]);
 
   useEffect(() => {
-    let active = true;
-    void (async () => {
+  let active = true;
+  setEventDate(defaultEventDateInput());
+  void (async () => {
       try {
         const [meRes, evRes] = await Promise.all([
           fetch("/api/auth/me", { cache: "no-store" }),
