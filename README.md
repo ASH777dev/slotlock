@@ -1,5 +1,7 @@
 # SlotLock — High-Concurrency Event & Seat Booking Platform
 
+[![SlotLock CI](https://github.com/ASH777dev/slotlock/actions/workflows/ci.yml/badge.svg)](https://github.com/ASH777dev/slotlock/actions/workflows/ci.yml)
+
 A full-stack event booking engine built with **Next.js (App Router)**, **TypeScript**, **Drizzle ORM**, and **Neon PostgreSQL**, engineered to prevent double-booking under burst concurrency using **PostgreSQL pessimistic row-level locking (`SELECT ... FOR UPDATE`)**, **idempotency keys**, and **RBAC**.
 
 - **Live Application:** [https://slotlock-lovat.vercel.app](https://slotlock-lovat.vercel.app)
