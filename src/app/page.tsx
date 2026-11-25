@@ -92,16 +92,16 @@ export default function SlotLockPage() {
   }, [loadEvents, loadBookings]);
 
   useEffect(() => {
-  let active = true;
-  setEventDate(defaultEventDateInput());
-  void (async () => {
-      try {
-        const [meRes, evRes] = await Promise.all([
-          fetch("/api/auth/me", { cache: "no-store" }),
-          fetch("/api/events", { cache: "no-store" }),
-        ]);
+        let active = true;
+        void (async () => {
+          try {
+            const [meRes, evRes] = await Promise.all([
+              fetch("/api/auth/me", { cache: "no-store" }),
+              fetch("/api/events", { cache: "no-store" }),
+            ]);
 
-        if (!active) return;
+            if (!active) return;
+            setEventDate((prev) => prev || defaultEventDateInput());
 
         if (evRes.ok) {
           const evData = await evRes.json();
