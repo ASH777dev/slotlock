@@ -55,3 +55,17 @@ export function formatZodError(error: z.ZodError) {
     message: issue.message,
   }));
 }
+export const createBookingSchema = z.object({
+  eventId: z.string().uuid("Invalid event ID format"),
+  seatCount: z
+    .number()
+    .int("Seat count must be a whole number")
+    .min(1, "Must book at least 1 seat")
+    .max(10, "Cannot book more than 10 seats per transaction"),
+});
+
+export const idempotencyKeySchema = z
+  .string()
+  .trim()
+  .min(8, "Idempotency-Key header must be at least 8 characters")
+  .max(128, "Idempotency-Key header must be at most 128 characters");
